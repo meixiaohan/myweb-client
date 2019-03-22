@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import Tools from "./views/Toolst.vue";
+import Tools from "./views/Tools.vue";
+import Mybill from "./views/Mybill.vue";
 
 Vue.use(Router);
 
@@ -32,6 +33,11 @@ export default new Router({
       path: "/tools",
       name: "tools",
       component: Tools
-    }
+    },
+    {
+      path: "/tools/Mybill",
+      name: "Mybill",
+      component: Mybill
+    },
   ]
 });

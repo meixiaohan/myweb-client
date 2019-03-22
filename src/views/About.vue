@@ -34,7 +34,7 @@
               <div class="project_title">{{project.title}}</div>
               <div class="project_details">{{project.project_introduce}}</div>
               <div class="github">
-                <span>Github地址：{{project.url}}</span>
+                Github地址：{{project.url}}
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@ export default {
           time: "大学期间"
         },
         {
-          title: "H5的页面初体验",
+          title: "H5的页面初次体验",
           project_introduce:
             "初次体验手机H5展示页面的设计，通过jQuery以及css设计一些动画以及点击的交互效果。使用了jQuery以及touchSwipe.js来实现手机端的下划上划页面的切换效果。",
           url: "https://github.com/meixiaohan/H5-Page",
@@ -255,16 +255,21 @@ export default {
   cursor: pointer;
 }
 
+
 .container {
   position: absolute;
   top: 110px;
   left: 50%;
   padding: 0 15px;
   transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  
   border-left: 3px solid rgba(131, 128, 128, 0.2);
   border-right: 3px solid rgba(131, 128, 128, 0.2);
   z-index: 1;
   background: #fff;
+  width: 100%;
 }
 
 #page1,
@@ -477,9 +482,9 @@ export default {
   }
 }
 
-@media (max-width: 769px) {
+@media (min-width: 500px) and (max-width: 769px) {
   .container {
-    width: 520px;
+    width: 500px;
   }
   .black_line {
     width: 490px;
@@ -489,6 +494,33 @@ export default {
     width: 50px;
     font-size: 12px;
   }
+  .project_title {
+    font-size: 16px;
+  }
+  .get_time {
+    display: block;
+    position: static;
+  }
+}
+
+
+@media (min-width: 320px) and (max-width: 499px) {
+  .container {
+    width: 400px;
+  }
+  .black_line {
+    width: 400px;
+  }
+  .time {
+    left: 0;
+    width: 50px;
+    font-size: 12px;
+  }
+  .github{
+    width: 70px;
+    font-size: 12px;
+  }
+  
   .project_title {
     font-size: 16px;
   }

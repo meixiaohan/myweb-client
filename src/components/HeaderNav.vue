@@ -56,7 +56,6 @@ export default {
 </script>
 
 <style scoped>
-
 .header-container{
     width: 100%;
     height: 70px;
@@ -117,7 +116,6 @@ export default {
   width: 32px;
   height: 3px;
   background: rgb(0, 0, 0);
-  border: 1px solid rgb(0, 0, 0);
   position: absolute;
   top: 23px;
   left: 11px;
@@ -136,7 +134,6 @@ export default {
   background: rgb(0, 0, 0);
   position: absolute;
   top: -10px;
-  transform: translateX(-1px);
   transition: top ease 0.25s, opacity 0.1s ease-in;
   transition-timing-function: ease;
   transition-duration: 0.3s;
@@ -153,14 +150,13 @@ export default {
   background: rgb(0, 0, 0);
   position: absolute;
   bottom: -10px;
-  transform: translateX(-1px);
   transition: bottom ease 0.25s, opacity 0.1s ease-in;
   border-radius: 5px;
 }
 
 .open .navbar-icon span:before {
   top: 0;
-  transform: rotate(-90deg) translateX(2.2px);
+  transform: rotate(-90deg);
   transition: transform 0.22s ease-in 0.12s;
   background-color: #fff;
   border: solid  1px #fff;
@@ -175,7 +171,6 @@ export default {
   transform: rotate(225deg);
   transition: transform 0.22s ease-in 0.12s;
   background-color: #fff;
-  border: solid  1px #fff;
 }
 
 
