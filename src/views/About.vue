@@ -246,7 +246,18 @@ export default {
       ]
     };
   },
-  methods: {}
+  mounted() {
+    setTimeout(() => {
+      this.fresh();
+    }, 10);
+  },
+  methods: {
+    fresh(){  
+        if(location.href.indexOf("?reload=true")<0){
+            location.href+="?reload=true";  
+        }  
+    }  
+  }
 };
 </script>
 
@@ -264,7 +275,6 @@ export default {
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
-  
   border-left: 3px solid rgba(131, 128, 128, 0.2);
   border-right: 3px solid rgba(131, 128, 128, 0.2);
   z-index: 1;
@@ -512,7 +522,7 @@ export default {
     width: 400px;
   }
   .time {
-    left: 0;
+    left: -11px;
     width: 50px;
     font-size: 12px;
   }
@@ -527,6 +537,9 @@ export default {
   .get_time {
     display: block;
     position: static;
+  }
+  .ski{
+    font-size: 15px;
   }
 }
 </style>

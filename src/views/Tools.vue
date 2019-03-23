@@ -40,7 +40,7 @@ export default {
           title: "记",
           name: "记账本",
           desc: "用于记录自己每天的开销的小工具！",
-          url: "/tools/Mybill"
+          url: "/tools/mybill"
         }
       ]
     };
@@ -178,7 +178,7 @@ export default {
   }
 }
 
-@media (max-width: 769px) {
+@media (min-width: 500px) and (max-width: 769px) {
   .container,
   .content_container {
     width: 520px;
@@ -195,4 +195,11 @@ export default {
     line-height: 200px;
   }
 }
+
+@media (min-width: 320px) and (max-width: 499px) {
+ .tool{
+   width: 100%
+ }
+}
+
 </style>

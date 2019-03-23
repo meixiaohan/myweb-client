@@ -2,7 +2,7 @@
   <div class="mybill">
     <HeaderNav/>
     <div class="container">
-      <div class="edit_form">
+      <div class="edit_form animated bounceInLeft">
         <el-form
           :model="Mybill"
           status-icon
@@ -43,8 +43,8 @@
     </div>
     <div class="container">
       <div class="black_line"></div>
-      <h1>消费折线图(最近七次记录)</h1>
-      <span v-if="!isLocalStorage" style="color:red">暂时没有查询到数据</span>
+      <h1>消费折线图(最近七次记录) <span><router-link to="/tools/mybill/mybill_list">详细账单</router-link></span></h1>
+      <span v-if="!isLocalStorage" style="color:red">暂时没有查询到账单数据</span>
       <div id="bill_echarts" ref="echarts"></div>
     </div>
   </div>
@@ -55,7 +55,7 @@
 import HeaderNav from "../components/HeaderNav";
 import moment from "moment";
 export default {
-  name: "keepmoney",
+  name: "mybill",
   components: {
     HeaderNav
   },
@@ -72,7 +72,7 @@ export default {
         OC: [],
         DT: []
       },
-      Mybill: {
+      Mybill:{
         breakfast: "",
         lunch: "",
         dinner: "",
@@ -162,7 +162,7 @@ export default {
           boundaryGap: false,
           data: [],
           axisLabel: {
-            interval: 0, //0：全部显示，1：间隔为1显示对应类目，2：依次类推，（简单试一下就明白了，这样说是不是有点抽象）
+            interval: 0, //0：全部显示，1：间隔为1显示对应类目，2：依次类推
             rotate: 40 //倾斜显示，-：顺时针旋转，+或不写：逆时针旋转
           }
         },
@@ -213,7 +213,7 @@ export default {
   mounted() {
     if (localStorage.Mybill) {
       this.isLocalStorage = true;
-      this.MyLocalStroage = JSON.parse(localStorage.getItem("Mybill"));
+      this.MyLocalStroage = (JSON.parse(localStorage.getItem("Mybill")));
       let keys = Object.keys(this.MyLocalStroage);
       this.changeData(keys);
     }
@@ -230,7 +230,7 @@ export default {
         if (vali) {
           let time = moment().format("YYYY-MM-DD");
           // let time = moment().subtract("days", 1).format("YYYY-MM-DD");
-          console.log(time);
+          // console.log(time);
           this.Mybill.date = time;
           this.MyLocalStroage[time] = this.Mybill;
           localStorage.setItem("Mybill", JSON.stringify(this.MyLocalStroage));
@@ -241,9 +241,7 @@ export default {
       });
     },
     drawEcharts() {
-      // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(document.getElementById("bill_echarts"));
-      // 绘制图表
       myChart.setOption(this.option);
       window.onresize = function() {
         myChart.resize();
@@ -352,7 +350,19 @@ export default {
 }
 
 h1 {
+  width: 100%;
   color: rgb(99, 107, 107);
+}
+
+h1 span{
+  float: right;
+}
+
+
+h1 span a{
+   color: rgb(177, 166, 166);
+   font-size: 18px;
+   text-decoration: underline;
 }
 
 #bill_echarts {
@@ -418,5 +428,8 @@ input{
     width: 400px;
     height: 320px;
   }
+  h1 span a{
+   font-size: 16px;
+}
 }
 </style>
