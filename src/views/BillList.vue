@@ -13,47 +13,58 @@
       </div>
     </div>
     <div class="container">
-      <div class="list_table">
-        <el-table :data="tableList[0]" style="width: 90%">
+      <div class="list_table animated bounceInUp">
+        <el-table
+          :data="tableList.slice((currpage - 1) * pagesize, currpage * pagesize)"
+          style="width: 90%"
+        >
           <el-table-column type="expand">
             <template slot-scope="props">
-              <el-form label-position="left" label-width="100" inline class="demo-table-expand">
-                <el-form-item label="商品名称">
+              <el-form label-position="left" inline class="demo-table-expand">
+                <el-form-item label="早饭消费:">
                   <span>{{ props.row.breakfast }}</span>
                 </el-form-item>
-                <el-form-item label="所属店铺">
+                <el-form-item label="午饭消费:">
                   <span>{{ props.row.lunch }}</span>
                 </el-form-item>
-                <el-form-item label="商品 ID">
+                <el-form-item label="晚饭消费:">
                   <span>{{ props.row.dinner }}</span>
                 </el-form-item>
-                <el-form-item label="店铺 ID">
+                <el-form-item label="交通消费:">
                   <span>{{ props.row.transport }}</span>
                 </el-form-item>
-                <el-form-item label="商品分类">
+                <el-form-item label="购物消费:">
                   <span>{{ props.row.shopping }}</span>
                 </el-form-item>
-                <el-form-item label="店铺地址">
+                <el-form-item label="其他消费:">
                   <span>{{ props.row.other }}</span>
                 </el-form-item>
-                <el-form-item label="商品描述">
-                  <span>{{ props.row.desc }}</span>
+                <el-form-item label="总花销:">
+                  <span>{{ props.row.total }}</span>
                 </el-form-item>
               </el-form>
             </template>
           </el-table-column>
           <el-table-column label="账单日期" prop="date"></el-table-column>
           <el-table-column label="总消费" prop="total"></el-table-column>
+          <el-table-column label="账单类型" prop="type"></el-table-column>
         </el-table>
       </div>
       <div class="pagination">
-        <el-pagination background layout="prev, pager, next" :total="100"></el-pagination>
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :page-size="pagesize"
+          :total="tableList.length"
+          @current-change="handleCurrentChange"
+          @size-change="handleSizeChange"
+        ></el-pagination>
       </div>
     </div>
   </div>
 </template>
 
-
+:page-sizr:"pagesize" 
 <script>
 import HeaderNav from "../components/HeaderNav";
 export default {
@@ -65,24 +76,37 @@ export default {
     return {
       tableList: [],
       currpage: 1,
-      pagesize: 10
+      pagesize: 7
     };
   },
   mounted() {
-      this.getTableList();
+    this.getTableList();
   },
   methods: {
     getTableList() {
       if (localStorage.Mybill) {
-        this.tableList.push(JSON.parse(localStorage.getItem("Mybill")));
-        let keys = Object.keys(this.tableList[0]);
-        for(let  key in keys ){
-            let total = this.tableList[0][keys[key]].breakfast+this.tableList[0][keys[key]].lunch+this.tableList[0][keys[key]].dinner+this.tableList[0][keys[key]].transport+this.tableList[0][keys[key]].shopping+this.tableList[0][keys[key]].other;
-            this.tableList[0][keys[key]].total = total;
-            console.log(key)
+        let mybill = JSON.parse(localStorage.getItem("Mybill"));
+        let keys = Object.keys(mybill);
+        for (let key in keys) {
+          var total =
+            parseInt(mybill[keys[key]].breakfast) +
+            parseInt(mybill[keys[key]].lunch) +
+            parseInt(mybill[keys[key]].dinner) +
+            parseInt(mybill[keys[key]].transport) +
+            parseInt(mybill[keys[key]].shopping) +
+            parseInt(mybill[keys[key]].other);
+          mybill[keys[key]].total = total;
+          mybill[keys[key]].type = "生活账单";
+          this.tableList.push(mybill[keys[key]]);
         }
-        console.log(this.tableList)
+        this.tableList = this.tableList.reverse();
       }
+    },
+    handleCurrentChange(cpage){
+					this.currpage = cpage;      
+    },
+    handleSizeChange(psize){
+      this.pagesize = psize;
     }
   }
 };
@@ -116,25 +140,25 @@ export default {
 }
 
 .list_table {
-  border: 2px solid rgb(119, 113, 113);
+  border: 2px solid rgb(233, 223, 223);
   border-radius: 5px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-
+.pagination {
+  width: 90%;
+  text-align: center;
+  margin-top: 50px;
+}
 
 .demo-table-expand {
-    font-size: 0;
-  }
-  .demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
-  }
+  font-size: 0;
+}
+
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
 
 @media (min-width: 1201px) {
   .container {
