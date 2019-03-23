@@ -85,10 +85,6 @@ export default {
 
 
 <style scoped>
-.home {
-  width: 100%;
-  height: 100%;
-}
 
 .container {
   margin-left: auto;
@@ -156,6 +152,27 @@ export default {
   .welcome .title h1{
     font-size: 35px;
   }
+}
+
+
+@media (min-width: 500px) and (max-width: 769px) {
+  .container {
+    width: 500px;
+  }
+   .welcome .title h1{
+    font-size: 35px;
+  }
+}
+
+
+@media (min-width: 320px) and (max-width: 499px) {
+  .container {
+    width: 420px;
+  }
+  .welcome .title h1{
+    font-size: 25px;
+  }
+  
 }
 
 @keyframes lighting {

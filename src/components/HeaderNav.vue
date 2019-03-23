@@ -217,7 +217,7 @@ export default {
   margin: 0 auto;
   list-style: none;
   text-align: center;
-  font-weight: 600;
+  font-weight: 400;
   margin-top: 10px;
   white-space: nowrap;
   opacity: 0;
@@ -271,22 +271,29 @@ export default {
 
 
 @media (min-width: 992px) and (max-width: 1200px) {
-  .menu ul li {
+  .menu ul li span {
     font-size: 2.8rem;
   }
 }
 
 @media (min-width: 770px) and (max-width: 991px) {
-  .menu ul li {
+  .menu ul li span{
     font-size: 2.6rem;
   }
 }
 
-@media (max-width: 769px){
-  .menu ul li {
-    font-size: 2.4rem;
+@media (min-width: 500px) and (max-width: 769px) {
+ .menu ul li span{
+    font-size: 2.2rem;
   }
+}
 
+
+@media (min-width: 320px) and (max-width: 499px) {
+  .menu ul li span{
+    font-size: 2rem;
+  }
+  
 }
 
 </style>

@@ -198,7 +198,8 @@ export default {
 
 @media (min-width: 320px) and (max-width: 499px) {
  .tool{
-   width: 100%
+   width: 90%;
+   margin-bottom: 30px;
  }
 }
 
